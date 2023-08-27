@@ -8,7 +8,7 @@
 
 - `vimrc`
 
-    ```
+    ```vim
     # ~/.vimrc
 
     colorscheme onedark
