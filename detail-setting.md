@@ -148,7 +148,7 @@ au BufRead,BufNewFile *.java set expandtab
 
 ### Typo alias
 
-```
+```vim
 # ~/.vimrc
 
 command! -bang W w<bang>   " alias :W to :w
