@@ -31,7 +31,7 @@
 
 ### global setting
 
-```
+```vim
 # ~/.vimrc
 
 set nocompatible
@@ -103,7 +103,7 @@ endif
 
 ### File Types
 
-```
+```vim
 " ======================
 " |     FILE TYPES     |
 " ======================
@@ -176,7 +176,7 @@ mkdir -p ${VIM_DIR}/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ${VIM_DIR}/bundle/Vundle.vim
 ```
 
-```
+```vim
 # ~/.vimrc
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -220,7 +220,7 @@ call vundle#end()  " required
 
 - `vimrc`
 
-    ```
+    ```vim
     " NERDTree window 위치: 좌측
     let NERDTreeWinPos = "left"
     " NERDTree 창 열기/닫기: F11
@@ -253,7 +253,7 @@ call vundle#end()  " required
 
 - `vimrc`
 
-    ```
+    ```vim
     " 이전 buffer로 이동: , + q
     nmap <leader>q :bp<CR>
     " 다음 buffer로 이동: , + w
@@ -294,7 +294,7 @@ call vundle#end()  " required
 
 - `vimrc`
 
-    ```
+    ```vim
     " ',' x 2로 html tag를 자동 완성
     let g:user_emmet_leader_key=','
     ```
@@ -313,7 +313,7 @@ call vundle#end()  " required
 
 - `vimrc`
 
-    ```
+    ```vim
     " tagbar 열고 닫기: , + t
     noremap <leader>t :TagbarToggle<CR>
     ```
@@ -359,7 +359,7 @@ call vundle#end()  " required
 
 - `vimrc`
 
-    ```
+    ```vim
     " 자동완성 목록에서 다음 선택지로 이동: tab
     inoremap <silent><expr> <TAB>
           \ coc#pum#visible() ? coc#pum#next(1) :
