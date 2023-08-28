@@ -118,6 +118,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'          " nerd tree with git status
 Plugin 'blueyed/vim-diminactive'              " split focus highlighting
 Plugin 'vim-airline/vim-airline'              " status bar & buffer tab
 Plugin 'airblade/vim-gitgutter'               " git diff marking
+Plugin 'vim-airline/vim-airline-themes'       " airline themes
 Plugin 'tComment'                             " easy comment with (ctrl + -) x2
 
 " Language support
@@ -159,6 +160,8 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 let g:diminactive_enable_focus = 1
 
 " ===AIRLINE===
+" airline theme: zenburn
+let g:airline_themes = 'zenburn'
 " 상단에 file buffer list를 유지
 let g:airline#extensions#tabline#enabled = 1
 " 이전 buffer로 이동: , + q

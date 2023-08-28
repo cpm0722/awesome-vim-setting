@@ -16,6 +16,7 @@ bash install.sh
     - [Xuyuanp/nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin)
     - [blueyed/vim-diminactive](https://github.com/blueyed/vim-diminactive)
     - [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
+    - [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
     - [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
     - [tComment](https://github.com/tomtom/tcomment_vim)
     - [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim)
