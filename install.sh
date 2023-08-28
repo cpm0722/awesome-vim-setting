@@ -35,9 +35,12 @@ if [[ ${OS_TYPE} == "UBUNTU" ]]; then
     vim --version | head -1
     echo ""
 elif [[ ${OS_TYPE} == "MAC" ]]; then
-    echo "Install gsed ..."
+    echo "Upgrade Vim ..."
     ${INSTALLER} reinstall ${INSTALLER_OPTION} vim
+    echo ""
+    echo "Install gsed ..."
     ${INSTALLER} install ${INSTALLER_OPTION} ${SED}
+    echo ""
 fi
 
 
