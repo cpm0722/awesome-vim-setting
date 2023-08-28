@@ -9,6 +9,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
   INSTALLER=brew
   INSTALLER_OPTION="-q"
   SED="gsed"
+  export HOMEBREW_NO_AUTO_UPDATE=1
 else
   if grep -q 'Ubuntu' /etc/os-release; then
     echo "You are using Ubuntu."
@@ -44,6 +45,19 @@ elif [[ ${OS_TYPE} == "MAC" ]]; then
 fi
 
 
+if [[ $(which pip3) ]]; then
+    PIP=$(which pip3)
+    echo "Use pip ${PIP}"
+elif [[ $(which pip) ]]; then
+    PIP=$(which pip)
+    echo "Use pip ${PIP}"
+else
+    echo "There is no pip or pip3. Please Install python3-pip."
+    exit 1
+fi
+
+
+
 echo "Install Vundle.vim ..."
 VIM_DIR=${HOME}/.vim
 if [[ -e ${VIM_DIR} ]]; then
@@ -72,7 +86,7 @@ echo ""
 
 
 echo "Install Language Server Dependencies ..."
-pip install -q autopep8 flake8                      # Python Language Server dependency
+${PIP} install -q autopep8 flake8                      # Python Language Server dependency
 ${INSTALLER} install ${INSTALLER_OPTION} ccls       # C/C++ langauge server dependency
 npm install -g bash-language-server                 # bash langauge server dependency
 npm install -g eslint eslint-plugin-vue -D          # vue langauge server dependency
@@ -116,6 +130,7 @@ echo ""
 
 
 echo "Apply CoC Python Snippets ..."
+mkdir -p ${HOME}/.config/coc/ultisnips
 cp ${PWD}/snippets/* ${HOME}/.config/coc/ultisnips/
 echo ""
 
