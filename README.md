@@ -95,6 +95,7 @@ bash install.sh
     - `<CTRL>ww`: 다음 split으로 이동 (주로 NERDTree window와 file window 사이 이동할 떄 사용)
     - `o`: NERDTree window에서 해당 file을 열기 (온전하게 한 화면으로 열림)
     - `<ENTER>`: NERDTree window에서 해당 file을 열기 (vsplit으로 열려 가로 이분할이 됨)
+    - `,r`: NERDTree window에서 cursor가 위치한 directory에 대한 file list를 갱신 (NERDTree window가 열린 후 추가/삭제/rename된 file이 NERDTree에 반영)
     - `<SHIFT>c`: NERDTree window에서 해당 directory를 root directory로 하도록 tree를 재설정
 - tComment
     - `<CTRL>--`: 선택한 block을 주석 처리
