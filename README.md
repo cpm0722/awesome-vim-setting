@@ -89,7 +89,7 @@ bash install.sh
 ### Plugins
 - airline
     - `,q` / `,w`: vim 화면 상단 file buffer list에서 이전/이후 file buffer로 이동
-    - `,c`: vim 화면 상단 file buffer list에서 현재 file을 제거
+    - `,e`: vim 화면 상단 file buffer list에서 현재 file을 제거
 - NERDTree
     - `<F11>`: NERDTree window를 open / close
     - `<CTRL>ww`: 다음 split으로 이동 (주로 NERDTree window와 file window 사이 이동할 떄 사용)
