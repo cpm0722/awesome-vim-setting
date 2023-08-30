@@ -1,9 +1,11 @@
 # Awesome-vim-setting
 
+![08-30-2023-11 51 03](https://github.com/cpm0722/awesome-vim-setting/assets/18459502/c140d7a6-194a-4b76-994a-9b62f6a6c799)
+
 ## Install
 
 ```bash
-bash install.sh
+git clone https://github.com/cpm0722/awesome-vim-setting && cd awesome-vim-setting && bash install.sh
 ```
 
 - Supported OS: Ubuntu / OS-X
