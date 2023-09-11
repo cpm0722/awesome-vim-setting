@@ -62,6 +62,7 @@ echo "Install Vundle.vim ..."
 VIM_DIR=${HOME}/.vim
 if [[ -e ${VIM_DIR} ]]; then
     echo "${VIM_DIR} is already exists. Back-up ${VIM_DIR} file into ${HOME}/.vim_bak"
+    rm -rf ${HOME}/.vim_bak
     mv ${VIM_DIR} ${HOME}/.vim_bak
 fi
 mkdir -p ${VIM_DIR}
