@@ -17,6 +17,7 @@ else
     INSTALLER=apt-get
     INSTALLER_OPTION="-y -q"
     SED="sed"
+  ${INSTALLER} update
   else
     echo "You are using Linux but not Ubuntu."
     exit 1
