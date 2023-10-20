@@ -83,7 +83,7 @@ echo ""
 
 
 echo "Install Node.js ..."
-${INSTALLER} install ${INSTALLER_OPTION} nodejs
+${INSTALLER} install ${INSTALLER_OPTION} nodejs npm
 echo ""
 
 
