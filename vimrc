@@ -236,11 +236,13 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " 자동완성 목록에서 이전 선택지로 이동: shift + tab
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " 목록에서 현재 위치를 선택: Enter
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" 목록 닫기: ; (;가 optional인 python에서만 적옹)
+au BufRead,BufNewFile *.py inoremap <silent><expr> ; coc#pum#visible() ? coc#pum#cancel() : ";"
 
 " 이후 diagnostic로 이동: [ + g
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
