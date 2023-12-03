@@ -24,14 +24,405 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet main "init main function"
+
+snippet main "__init__() Template"
 import os, sys
 import re, json
 import time, copy, math
 
 
 def main():
+    pass
 
 if __name__ == "__main__":
     main()
+endsnippet
+
+
+snippet argpase "Argument Parser Template"
+import argparse
+
+def main(args):
+    pass
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--int-arg', type=int, default=0)
+    parser.add_argument('--str-arg', type=str, default="str")
+    parser.add_argument('--required-arg', type=str, required=True)
+    parser.add_argument('--multi-arg', type=str, nargs='+', required=True) # python run.py --multi-arg arg1 arg2 arg3 arg4 --second-arg 1
+    parser.add_argument('--flag-on',  dest='flag', action='store_true')
+    parser.add_argument('--flag-off', dest='flag', action='store_false')
+    parser.set_defaults(flag=True)
+    args = parser.parse_args()
+
+    main(args)
+endsnippet
+
+
+snippet logging "Logging Template"
+now_str = str(datetime.datetime.now())\
+    .replace(" ", "_")\
+    .split(".")[0]\
+    .removeprefix("20")\
+    .replace("-", "")\
+    .replace(":", "")
+log_file = os.path.join("./log", "collect_"+now_str+".out")
+fmt = "%(levelname)s    %(message)s"
+logging.basicConfig(level=logging.INFO, format=fmt, filename=log_file)
+endsnippet
+
+
+snippet subprocess "Execute Command Template"
+import subprocess
+
+cmd = subprocess.run("ls -l", shell=True, text=True, capture_output=True)
+
+cmd.returncode # exit code (0)
+cmd.args       # 'ls -l'
+cmd.stdout     # 'total 0\ndrwx-rxr-x 7 user staff 224 2 15 21:16 test
+endsnippet
+
+
+snippet http_get "HTTP GET Request"
+import requests
+URL = "http://example.com/foo/bar"
+response = requests.get(URL)
+output_json = response.json()
+endsnippet
+
+
+snippet http_post "HTTP POST Request"
+import requests
+URL = "http://example.com/foo/bar"
+payload = {
+    "foo": "bar",
+}
+response = requests.post(URL, json=payload)
+output_json = response.json()
+endsnippet
+
+
+snippet download_file_from_url "Download file from URL safely"
+def download_file_from_url(url, local_filename=''):
+    if not local_filename:
+        local_filename = url.split('/')[-1]
+    # NOTE the stream=True parameter below
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(local_filename, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                # If you have chunk encoded response uncomment if
+                # and set chunk_size parameter to None.
+                #if chunk:
+                f.write(chunk)
+    return local_filename
+endsnippet
+
+
+snippet download_file_from_google_drive_url "Download file from Google Drive URL safely"
+def download_file_from_url(url, local_filename=''):
+    if not local_filename:
+        local_filename = url.split('/')[-1]
+    # NOTE the stream=True parameter below
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(local_filename, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                # If you have chunk encoded response uncomment if
+                # and set chunk_size parameter to None.
+                #if chunk:
+                f.write(chunk)
+    return local_filename
+
+
+def download_file_from_google_drive_url(metadata, url, local_fname):
+    def get_file_id_from_google_drive_url(url):
+        p = r"/file/d/([A-Za-z0-9_-]+)|[?&]id=([A-Za-z0-9_-]+)"
+        result = re.search(p, url)
+        if result is None:
+            return None
+        return re.sub(r"\/file\/d\/|[\?|\&]id\=", "", result[0])
+
+    file_id = get_file_id_from_google_drive_url(url)
+    if file_id is None:
+        print(metadata, "Google Drive URL is invalid. {}".format(url))
+        return None
+
+    download_url = "https://docs.google.com/uc?export=download&id={}".format(file_id)
+    download_file_from_url(download_url, local_fname))
+endsnippet
+
+
+snippet regex_specials "Regex Special Character pattern"
+r'\(|\)|\{|\}|\[|\]|\'|\"|\‘|\’|\“|\”|\`|\\|\/|\||\=|\?|\.|\,|\;|\:|\*|\~|\`|\!|\^|\-|\_|\+|\<|\>|\@|\#|\$|\%|\&|\·|\…'
+endsnippet
+
+
+snippet regex_hangul "Regex Hangul pattern"
+r'[\u3131-\u3163\uac00-\ud7a3]'
+endsnippet
+
+
+snippet regex_chinese_japanese "Regex Chinese & Japanese pattern"
+r'[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]'
+endsnippet
+
+
+snippet remove_specials "Regex Remove Special Characters"
+def remove_specials(text):
+    remove = re.compile(r'\(|\)|\{|\}|\[|\]|\'|\"|\‘|\’|\“|\”|\`|\\|\/|\||\=|\?|\.|\,|\;|\:|\*|\~|\`|\!|\^|\-|\_|\+|\<|\>|\@|\#|\$|\%|\&|\·|\…')
+    return remove.sub(' ', text)
+endsnippet
+
+
+snippet squeeze_spaces "Regex replace multi-space characters into one space character"
+def squeeze_spaces(text):
+    return re.sub(r'\s+', ' ', text.strip())
+endsnippet
+
+
+snippet remove_chinese_japanese "Regex Remove Chinese & Japanese Characters"
+def remove_chinese_japanese(text):
+    remove = re.compile(r'[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]')
+    return remove.sub(' ', text)
+endsnippet
+
+
+snippet remove_not_usefuls "Regex Remove unuseful characters (Remain only Alphabet, Numeric, Hangul, One Space)"
+def remove_not_usefuls(text):
+    text = re.sub(r'\s+', ' ', text.strip())
+    remove = re.compile(r'[^ A-Za-z0-9\u3131-\u3163\uac00-\ud7a3]+')
+    return remove.sub('', text)
+endsnippet
+
+
+snippet image_pil "Image Open with Pillow"
+from PIL import Image
+
+image = Image.open("path/to/image.jpg").convert("RGB")
+endsnippet
+
+
+snippet image_cv "Image Open with OpenCV2"
+import cv2
+
+image = cv2.imread("path/to/image.jpg")
+endsnippet
+
+
+snippet image_pil2bytes "Image Convert Pillow to Bytes"
+import io
+from PIL import Image
+
+image = Image.open("path/to/image.jpg").convert("RGB")
+
+with io.BytesIO() as image_stream:
+    image.save(image_stream, 'jpeg')
+    image_bytes = image_stream.getvalue()
+endsnippet
+
+
+snippet image_pil2np "Image Convert Pillow to Numpy"
+from PIL import Image
+import numpy as np
+
+image = Image.open("path/to/image.jpg").convert("RGB")
+image_array = np.array(image)
+endsnippet
+
+
+snippet image_pil2cv "Image Convert Pillow to OpenCV2"
+from PIL import Image
+import numpy as np
+import cv2
+
+image = Image.open("path/to/image.jpg").convert("RGB")
+image_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+endsnippet
+
+
+snippet image_bytes2pil "Image Convert Bytes to Pillow"
+import io
+from PIL import Image
+
+image = Image.open(io.BytesIO(image_bytes))
+endsnippet
+
+
+snippet image_np2pil "Image Convert Numpy to Pillow"
+from PIL import Image
+import numpy as np
+
+image = Image.fromarray(image_array)
+endsnippet
+
+
+snippet image_np2cv "Image Convert Numpy to OpenCV2"
+import numpy as np
+import cv2
+
+image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+endsnippet
+
+
+snippet image_cv2pil "Image Convert OpenCV2 to Pillow"
+from PIL import Image
+import numpy as np
+import cv2
+
+image = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
+image = Image.fromarray(image)
+endsnippet
+
+
+snippet image_cv2bytes "Image Convert OpenCV2 to Bytes"
+import cv2
+
+image = cv2.imread("path/to/image.jpg")
+image_bytes = cv2.imencode(".jpg", image)[1].tobytes()
+endsnippet
+
+
+snippet image_bytes2np "Image Convert Bytes to Numpy"
+import io
+import numpy as np
+import cv2
+
+image_bytes = open("path/to/image.jpg", "rb").read()
+image_array = np.frombuffer(image_bytes, dtype=np.uint8)
+image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+endsnippet
+
+
+snippet image_bytes2cv "Image Convert Bytes to OpenCV2"
+import io
+import numpy as np
+
+image_bytes = open("path/to/image.jpg", "rb").read()
+image_array = np.frombuffer(image_bytes, dtype=np.uint8)
+endsnippet
+
+
+snippet image_crop "Image Crop"
+from PIL import Image
+import numpy as np
+import cv2
+
+image = Image.open("path/to/image.jpg").convert("RGB")
+image_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+image_cropped = image_cv[y0:y1, x0:x1]
+image_cropped = cv2.cvtColor(image_cropped, cv2.COLOR_BGR2RGB)
+image_cropped = Image.fromarray(image_cropped)
+endsnippet
+
+
+snippet image_url2pil "Download Image from URL and read as Pillow"
+def url2pil(image_url):
+    response = requests.get(image_url)
+    if response.status_code // 100 > 3:
+        return None
+    image_bytes = response.content
+    try:
+        return Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    except OSError: # OSError: image file is truncated
+        return None
+endsnippet
+
+
+snippet download_images_multithread "Download Image from URL with multithreading"
+import os, sys
+import requests
+import concurrent.futures
+from PIL import Image
+import io
+
+def url2pil(image_url):
+    response = requests.get(image_url)
+    if response.status_code // 100 > 3:
+        return None
+    image_bytes = response.content
+    try:
+        return Image.open(io.BytesIO(image_bytes)).convert("RGB")
+    except OSError: # OSError: image file is truncated
+        return None
+
+def download_multiple_images(image_urls):
+    # Create a ThreadPoolExecutor with a max_workers of 10 (one for each image)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
+        # Submit a download_and_convert_image task for each image URL
+        futures = [executor.submit(url2pil, image_url) for image_url in image_urls]
+        concurrent.futures.wait(futures)
+        # Iterate over the completed tasks and get the results (PIL images)
+        images = [future.result() for future in futures]
+    return images
+endsnippet
+
+
+snippet save_pickle "File save with Pickle"
+import pickle
+
+def save_with_pickle(data, path):
+    with open(path, 'wb') as f:
+        pickle.dump(data, f)
+endsnippet
+
+
+snippet load_pickle "File load with Pickle"
+import pickle
+
+def load_with_pickle(path):
+    with open(path, 'rb') as f:
+        data = pickle.load(f)
+    return data
+endsnippet
+
+
+snippet save_torch "File save with Torch"
+import torch
+
+data = dict()
+fname = "example.pt"
+torch.save(data, fname)
+endsnippet
+
+
+snippet load_torch "File load with Torch"
+import torch
+
+fname = "example.pt"
+data = torch.load(fname)
+endsnippet
+
+
+snippet json_dump_pretty "JSON pretty dump"
+import json
+
+data = dict()
+fname = "example.json"
+with open(fname, "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=4)
+endsnippet
+
+
+snippet no_randomness "No Randomness (for reproducible)"
+import random
+import numpy as np
+import torch
+
+random.seed(random_seed)
+np.random.seed(random_seed)
+torch.manual_seed(random_seed)
+torch.cuda.manual_seed(random_seed)
+# torch.cuda.manual_seed_all(random_seed) # if use multi-GPU
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+endsnippet
+
+
+snippet get_model_num_params "get #Parameters for torch model"
+model = ...
+
+model_parameters = filter(lambda p: p.requires_grad, model.parameters())
+params = sum([np.prod(p.size()) for p in model_parameters])
 endsnippet
