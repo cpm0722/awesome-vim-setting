@@ -1,4 +1,5 @@
 {
+    "inlayHint.enableParameter": false,
     "coc.preferences.extensionUpdateCheck": "daily",
     "python.pythonPath": "python3"
     "python.linting.flake8Enabled": true,
