@@ -102,7 +102,11 @@ echo ""
 
 
 echo "Install ctags ..."
-${INSTALLER} install ${INSTALLER_OPTION} ctags
+if [[ ${OS_TYPE} == "UBUNTU" ]]; then
+    ${INSTALLER} install ${INSTALLER_OPTION} exuberant-ctags
+elif [[ ${OS_TYPE} == "MAC" ]]; then
+    ${INSTALLER} install ${INSTALLER_OPTION} ctags
+fi
 echo ""
 
 
