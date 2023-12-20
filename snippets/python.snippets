@@ -197,6 +197,17 @@ def remove_not_usefuls(text):
 endsnippet
 
 
+snippet base64_enc_dec "Base64 Encoding / Decoding"
+import base64
+
+s = "ABCDEFG"
+encoded = base64.b64encode(s.encode("utf-8"))
+
+decoded = base64.b64decode(encoded).decode("utf-8")
+print(decoded)
+endsnippet
+
+
 snippet image_pil "Image Open with Pillow"
 from PIL import Image
 
