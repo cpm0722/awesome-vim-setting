@@ -64,7 +64,7 @@ au BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.cu set smartindent       " inde
 au BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.cu set shiftwidth=4      " indent width: 4
 au BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.cu set tabstop=4         " tab width: 4
 au BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.cu set softtabstop=4     " tab width: 4
-au BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.cu set noexpandtab       " do not use '\t', replace multiple ' '
+au BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.cu set expandtab         " replace tab to space when saving
 
 " === PYTHON === 
 let python_version_3 = 1
