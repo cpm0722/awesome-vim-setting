@@ -30,6 +30,7 @@ if [[ ${OS_TYPE} == "UBUNTU" ]]; then
     vim --version | head -1
     echo "Upgrade Vim ..."
     echo ""
+    ${INSTALLER} install ${INSTALLER_OPTION} software-properties-common
     add-apt-repository -y ppa:jonathonf/vim && \
         ${INSTALLER} update ${INSTALLER_OPTION} && \
         ${INSTALLER} install ${INSTALLER_OPTION} vim
