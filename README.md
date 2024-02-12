@@ -117,3 +117,4 @@ git clone https://github.com/cpm0722/awesome-vim-setting && cd awesome-vim-setti
 
 ## Detail Settings
 - [detail-setting.md](detail-setting.md)
+
