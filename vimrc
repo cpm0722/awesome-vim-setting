@@ -138,6 +138,16 @@ call vundle#end()  " required
 
 let mapleader = ',' " <leader> is ',' key
 
+" ===CLIPBOARD===
+" visual mode로 선택한 text를 ~/.vim/clipboard로 copy하는 함수
+function! SaveVisualSelectionToFile()
+    " Save the selected text to /tmp/clipboard
+    " '<,'> are automatically inserted when you enter command mode from visual mode
+    execute "normal! :'<,'>w! ~/.vim/clipboard\<CR>"
+endfunction
+" text 선택 후 :C로 위 ~/.vim/clipboard로 copy
+command! -range C call SaveVisualSelectionToFile()
+
 " ===NERDTREE===
 " NERDTree window 위치: 좌측
 let NERDTreeWinPos = "left"
