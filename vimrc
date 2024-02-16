@@ -145,8 +145,14 @@ function! SaveVisualSelectionToFile()
     " '<,'> are automatically inserted when you enter command mode from visual mode
     execute "normal! :'<,'>w! ~/.vim/clipboard\<CR>"
 endfunction
-" text 선택 후 :C로 위 ~/.vim/clipboard로 copy
+" text 선택 후 :C로 ~/.vim/clipboard로 copy
 command! -range C call SaveVisualSelectionToFile()
+" ~/.vim/clipboard에서 paste하는 함수
+function! PasteFromClipboardFile()
+    execute "read! cat ~/.vim/clipboard"
+endfunction
+" :V로 ~/.vim/clipboard를 paste
+command! V call PasteFromClipboardFile()
 
 " ===NERDTREE===
 " NERDTree window 위치: 좌측
