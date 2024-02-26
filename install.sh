@@ -83,8 +83,41 @@ echo ""
 
 
 echo "Install Node.js ..."
-# ${INSTALLER} install ${INSTALLER_OPTION} nodejs npm
-curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
+
+function check_node_version() {
+    target_major=17
+
+    # Get current Node.js version, removing the leading 'v'
+    current_version=$(node -v | sed 's/v//')
+
+    # Break current version into components
+    current_major=$(echo $current_version | cut -d. -f1)
+
+    # Compare major version component only
+    if [ $current_major -lt $target_major ]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+if [[ ${OS_TYPE} == "UBUNTU" ]]; then
+    if NODE_PATH=$(which node); then
+        if [[ check_node_version ]]; then # if current node version is less then 17.x.x
+            # remove node
+            rm -f /etc/apt/sources.list.d/nodesource.list && \
+            apt --fix-broken install && \
+            apt update && \
+            apt remove -y nodejs nodejs-doc && \
+            apt autoremove -y && \
+            curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
+        fi
+    else
+        curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
+    fi
+elif [[ ${OS_TYPE} == "MAC" ]]; then
+    ${INSTALLER} install ${INSTALLER_OPTION} nodejs npm
+fi
 echo ""
 
 
