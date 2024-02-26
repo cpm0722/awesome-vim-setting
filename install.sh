@@ -59,7 +59,6 @@ else
 fi
 
 
-
 echo "Install Vundle.vim ..."
 VIM_DIR=${HOME}/.vim
 if [[ -e ${VIM_DIR} ]]; then
@@ -84,7 +83,8 @@ echo ""
 
 
 echo "Install Node.js ..."
-${INSTALLER} install ${INSTALLER_OPTION} nodejs npm
+# ${INSTALLER} install ${INSTALLER_OPTION} nodejs npm
+curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
 echo ""
 
 
