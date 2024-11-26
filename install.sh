@@ -85,7 +85,7 @@ echo ""
 echo "Install Node.js ..."
 
 function check_node_version() {
-    target_major=17
+    target_major=22
 
     # Get current Node.js version, removing the leading 'v'
     current_version=$(node -v | sed 's/v//')
@@ -101,6 +101,7 @@ function check_node_version() {
     fi
 }
 
+NODE_MAJOR_VERSION="22"
 if [[ ${OS_TYPE} == "UBUNTU" ]]; then
     if NODE_PATH=$(which node); then
         if [[ check_node_version ]]; then # if current node version is less then 17.x.x
@@ -109,14 +110,13 @@ if [[ ${OS_TYPE} == "UBUNTU" ]]; then
             apt --fix-broken install && \
             apt update && \
             apt remove -y nodejs nodejs-doc && \
-            apt autoremove -y && \
-            curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
-        fi
-    else
-        curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
+            apt autoremove -y
     fi
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+    # download and install Node.js (you may need to restart the terminal)
+    nvm install ${NODE_MAJOR_VERSION}
 elif [[ ${OS_TYPE} == "MAC" ]]; then
-    ${INSTALLER} install ${INSTALLER_OPTION} nodejs npm
+    ${INSTALLER} install ${INSTALLER_OPTION} node@${NODE_MAJOR_VERSION}
 fi
 echo ""
 
