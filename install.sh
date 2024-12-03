@@ -17,7 +17,14 @@ else
     INSTALLER=apt-get
     INSTALLER_OPTION="-y -q"
     SED="sed"
-  ${INSTALLER} update
+    ${INSTALLER} update
+  elif grep -q 'Debian' /etc/os-release; then
+    echo "You are using Debian."
+    OS_TYPE="UBUNTU"
+    INSTALLER=apt-get
+    INSTALLER_OPTION="-y -q"
+    SED="sed"
+    ${INSTALLER} update
   else
     echo "You are using Linux but not Ubuntu."
     exit 1
