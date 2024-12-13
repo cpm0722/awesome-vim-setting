@@ -118,6 +118,7 @@ if [[ ${OS_TYPE} == "UBUNTU" ]]; then
             apt update && \
             apt remove -y nodejs nodejs-doc && \
             apt autoremove -y
+        fi
     fi
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
     # download and install Node.js (you may need to restart the terminal)
