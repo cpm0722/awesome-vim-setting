@@ -139,8 +139,9 @@ if [[ ${OS_TYPE} == "UBUNTU" ]]; then
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     # download and install Node.js (you may need to restart the terminal)
     nvm install ${NODE_MAJOR_VERSION}
-    export PATH=/usr/local/nvm/versions/node/*/bin/node:${PATH}
-    echo 'export PATH=/usr/local/nvm/versions/node/*/bin/node:${PATH}' >> ${HOME}/.bashrc
+    
+    export PATH="${NVM_DIR}/versions/node/*/bin:${PATH}"
+    echo 'export PATH=${NVM_DIR}/versions/node/*/bin:${PATH}' >> ${HOME}/.bashrc
 elif [[ ${OS_TYPE} == "MAC" ]]; then
     ${INSTALLER} install ${INSTALLER_OPTION} node@${NODE_MAJOR_VERSION}
 fi
