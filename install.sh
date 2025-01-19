@@ -202,3 +202,10 @@ cp ${PWD}/snippets/* ${HOME}/.config/coc/ultisnips/
 echo ""
 
 echo "awesome-vim-setting is finished!"
+
+
+echo "Install Copilot ..."
+git clone https://github.com/github/copilot.vim.git ${VIM_DIR}/pack/github/start/copilot.vim
+mkdir -p ${HOME}/.config/github-copilot
+touch ${HOME}/.config/github-copilot/apps.json
+echo ""
