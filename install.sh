@@ -25,7 +25,6 @@ else
     INSTALLER=apt-get
     INSTALLER_OPTION="-y -q"
     SED="sed"
-    ${INSTALLER} update
   else
     echo "You are using Linux but not Ubuntu or Debian."
     exit 1
@@ -34,6 +33,11 @@ fi
 
 if [[ ${SUDO} -eq 1 ]]; then
     INSTALLER="sudo ${INSTALLER}"
+fi
+echo ""
+
+if [[ ${OS_TYPE} == "UBUNTU" ]]; then
+    ${INSTALLER} update
 fi
 echo ""
 
