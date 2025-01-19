@@ -9,26 +9,31 @@ if [ "$(uname -s)" == "Darwin" ]; then
   INSTALLER=brew
   INSTALLER_OPTION="-q"
   SED="gsed"
+  SUDO=0
   export HOMEBREW_NO_AUTO_UPDATE=1
 else
-  if grep -q 'Ubuntu' /etc/os-release; then
-    echo "You are using Ubuntu."
-    OS_TYPE="UBUNTU"
-    INSTALLER=apt-get
-    INSTALLER_OPTION="-y -q"
-    SED="sed"
-    ${INSTALLER} update
-  elif grep -q 'Debian' /etc/os-release; then
-    echo "You are using Debian."
+  if grep -q 'Ubuntu' /etc/os-release || grep -q 'Debian' /etc/os-release; then
+    echo "You are using Ubuntu or Debian."
+    if [[ $(whoami) == "root" ]]; then
+        echo "Current ID is root. Do not use sudo."
+        SUDO=0
+    else
+        echo "Current ID is $(whoami). Use sudo."
+        SUDO=1
+    fi
     OS_TYPE="UBUNTU"
     INSTALLER=apt-get
     INSTALLER_OPTION="-y -q"
     SED="sed"
     ${INSTALLER} update
   else
-    echo "You are using Linux but not Ubuntu."
+    echo "You are using Linux but not Ubuntu or Debian."
     exit 1
   fi
+fi
+
+if [[ ${SUDO} -eq 1 ]]; then
+    INSTALLER="sudo ${INSTALLER}"
 fi
 echo ""
 
