@@ -1,7 +1,7 @@
 {
     "inlayHint.enableParameter": false,
     "coc.preferences.extensionUpdateCheck": "daily",
-    "python.pythonPath": "python3"
+    "python.pythonPath": "python3",
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": ["--max-line-length=120"],
     "pyright.inlayHints.functionReturnTypes": false,
