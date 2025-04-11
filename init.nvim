@@ -145,9 +145,10 @@ EOF
 let mapleader = ',' " <leader> is ',' key
 
 " :open command
-vim.api.nvim_create_user_command('open', function(opts)
-  vim.cmd('edit ' .. opts.args)
-end, { nargs = 1, complete = 'file' })
+" Define a custom command :Open that behaves like :edit
+command! -nargs=1 -complete=file Open edit <args>
+" Remap :open to :Open in the command line
+cnoreabbrev <expr> open ((getcmdtype() ==# ':' && getcmdline() =~# '^open\>') ? 'Open' : 'open')
 
 " ===CLIPBOARD===
 " visual mode로 선택한 text를 ~/.vim/clipboard로 copy하는 함수
