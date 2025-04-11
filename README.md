@@ -8,6 +8,7 @@
 git clone https://github.com/cpm0722/awesome-vim-setting && cd awesome-vim-setting && bash install.sh
 ```
 
+- Use NeoVim
 - Supported OS: Ubuntu / OS-X
 
 ## Plugins / Themes / Dependencies
