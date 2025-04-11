@@ -82,10 +82,10 @@ au BufRead,BufNewFile *.json set softtabstop=4
 au BufRead,BufNewFile *.json set expandtab
 
 " === HTML / CSS / Javascript ===
-au BufRead,BufNewFile *.html,*.css,*.js,*.vue set shiftwidth=2
-au BufRead,BufNewFile *.html,*.css,*.js,*.vue set tabstop=2
-au BufRead,BufNewFile *.html,*.css,*.js,*.vue set softtabstop=2
-au BufRead,BufNewFile *.html,*.css,*.js,*.vue set expandtab
+au BufRead,BufNewFile *.html,*.css,*.js,*.tsx,*.vue set shiftwidth=2
+au BufRead,BufNewFile *.html,*.css,*.js,*.tsx,*.vue set tabstop=2
+au BufRead,BufNewFile *.html,*.css,*.js,*.tsx,*.vue set softtabstop=2
+au BufRead,BufNewFile *.html,*.css,*.js,*.tsx,*.vue set expandtab
 
 " === Java ===
 au BufRead,BufNewFile *.java set shiftwidth=4

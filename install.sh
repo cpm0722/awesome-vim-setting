@@ -118,6 +118,7 @@ pip3 install -q autopep8 flake8
 npm install -g bash-language-server
 npm install -g eslint eslint-plugin-vue -D
 npm install -g dockerfile-language-server-nodejs
+npm install -g @types/react @types/react-dom -D
 
 if $IS_MAC; then
     brew install ccls
