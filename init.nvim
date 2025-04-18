@@ -13,6 +13,8 @@ endif
 set encoding=utf-8              " default encoding: utf-8
 set fileencodings=utf-8,cp949,default,latin1
 
+set mouse=                      " disable mouse
+
 set noswapfile                  " disable .swp file
 
 set number                      " print line number
